@@ -60,6 +60,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+/* Screenshot výběru přímo do schránky (vyžaduje maim, slop, xclip) */
+#define SHCMD_SCREEN_CLIP "maim -s | xclip -selection clipboard -t image/png && notify-send 'Screenshot' 'Zkopírováno do schránky'"
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -96,6 +98,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	/*moje zkratky*/
+	{ MODKEY|ShiftMask,             XK_s,      spawn,    SHCMD(SHCMD_SCREEN_CLIP) },
 };
 
 /* button definitions */
